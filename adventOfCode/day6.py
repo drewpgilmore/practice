@@ -6,7 +6,7 @@ from inputs import readInputs
 inputs = readInputs(6)
 #print(len(inputs))
 
-def solve(input:list) -> int: 
+def solve(input:list, numDistinct:int) -> int: 
     
     
     def containsDupes(str) -> bool: 
@@ -21,11 +21,11 @@ def solve(input:list) -> int:
         return False
     
     
-    index = 4
+    index = numDistinct
     data = input[0]
     for i in range(index - 1, len(data)):
-        prevFour = data[i-3:i+1]
-        if containsDupes(prevFour):
+        prev = data[i - (numDistinct - 1):i + 1]
+        if containsDupes(prev):
             index += 1
             continue
         else:
@@ -35,5 +35,11 @@ def solve(input:list) -> int:
 
 sample = ['nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg']
 
-solution = solve(inputs)
-print(solution)
+#assert solve(sample, 4) == 5
+#assert solve(sample, 14) == 29
+
+partOne = solve(inputs, 4)
+partTwo = solve(inputs, 14)
+
+print(partOne)
+print(partTwo)
